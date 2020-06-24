@@ -22,14 +22,14 @@ steps:
 #    Write-Host "##vso[task.setvariable variable=CI_BUILD_TAG]$CI_BUILD_TAG"
 #   displayName: 'Set the tag name as an environment variable'
 
-- powershell: |
-   $ver = $env:git describe --match build
-   Write-Host "##vso[task.setvariable variable=Version]$ver"
-  displayName: 'Update version to Tag'
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+# - powershell: |
+#    $ver = $env:git describe --match build
+#    Write-Host "##vso[task.setvariable variable=Version]$ver"
+#   displayName: 'Update version to Tag'
+#   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
 
-- script: echo $(Version)
-  displayName: 'Run a one-line script'
+# - script: echo $(Version)
+#   displayName: 'Run a one-line script'
 
 # - powershell: echo "##vso[task.setvariable variable=a;isOutput=true]10"
 #   name: a_step
@@ -40,3 +40,12 @@ steps:
 #    Write-Host "##vso[task.setvariable variable=Version]$ver"
 #   displayName: 'Update version to Tag'
 #   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      $ver = Get-Location
+      Write-Host $ver
