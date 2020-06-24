@@ -23,10 +23,20 @@ steps:
 #   displayName: 'Set the tag name as an environment variable'
 
 - powershell: |
-   $ver = $env:BUILD_SOURCEBRANCH.remove(0, 10)
+   $ver = $env:git describe --match build
    Write-Host "##vso[task.setvariable variable=Version]$ver"
   displayName: 'Update version to Tag'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
 
 - script: echo $(Version)
   displayName: 'Run a one-line script'
+
+# - powershell: echo "##vso[task.setvariable variable=a;isOutput=true]10"
+#   name: a_step
+
+
+# - powershell: |
+#    $ver = $env:BUILD_SOURCEBRANCH.remove(0, 10)
+#    Write-Host "##vso[task.setvariable variable=Version]$ver"
+#   displayName: 'Update version to Tag'
+#   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
