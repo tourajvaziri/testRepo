@@ -47,5 +47,5 @@ steps:
     targetType: 'inline'
     script: |
       # Write your PowerShell commands here.
-      $ver = Get-Location
+      $ver = git describe --match build
       Write-Host $ver
