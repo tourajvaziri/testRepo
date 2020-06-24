@@ -48,4 +48,14 @@ steps:
     script: |
       # Write your PowerShell commands here.
       $ver = git describe --match build
+      $ver = $ver -match '.*-(\d+)-.*'
+      $ver = $ver[1]
       Write-Host $ver
+
+
+# $found = $string -match '.*-(\d+)-.*'
+# if ($found) {
+#     $spid = $matches[1]
+# }
+
+      
