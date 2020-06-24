@@ -49,7 +49,7 @@ steps:
       # Write your PowerShell commands here.
       $ver = git describe --match build
       $ver = $ver -match '.*-(\d+)-.*'
-      $ver = $ver[1]
+      $ver = $matches[1]
       Write-Host $ver
 
 
