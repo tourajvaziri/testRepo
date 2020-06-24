@@ -28,8 +28,7 @@ steps:
 #   displayName: 'Update version to Tag'
 #   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
 
-# - script: echo $(Version)
-#   displayName: 'Run a one-line script'
+
 
 # - powershell: echo "##vso[task.setvariable variable=a;isOutput=true]10"
 #   name: a_step
@@ -50,8 +49,11 @@ steps:
       $ver = git describe --match build
       $ver = $ver -match '.*-(\d+)-.*'
       $ver = $matches[1]
-      Write-Host $ver
+      Write-Host "##vso[task.setvariable variable=Version]$ver"
 
+
+- script: echo $(Version)
+  displayName: 'Run a one-line script'
 
 # $found = $string -match '.*-(\d+)-.*'
 # if ($found) {
